@@ -1,0 +1,71 @@
+:root {
+  --cobalt: #1f4fd1;
+  --cobalt-deep: #16338f;
+  --peri: #8ea6f5;
+  --ice: #f8f9ff;
+  --ink: #1b2350;
+  --ink-soft: #56608f;
+  --blob: #ffffff;
+  --line: #dfe3fb;
+  --todo-bg: #fff1c9;
+  --todo: #8a5a00;
+  --display: 'VT323', ui-monospace, Menlo , monospace;
+  --hand: 'VT323', ui-monospace, Menlo , monospace;
+  --pixels: 'VT323', ui-monospace, Menlo , monospace;
+  --body: 'Lexend', 'Segoe UI', system-ui , sans-serif;
+  --k:1; --tb:44px;
+  color-scheme:light;
+}
+html,body{
+    height:100%;
+}
+body{
+    margin:0;
+    background:linear-gradient(180deg,#8ea5d4 0%,#b4c4e5 34%,#d8e1f3 70%,#eef2fb 100%) fixed;background-color:#c9d5ee;
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:15px;
+    line-height:1.5;
+    overflow:hidden;-webkit-font-smoothing:antialiased}
+
+#cloudbg{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+#cloudbg .glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(30px);
+  opacity: .45;
+}
+body.mobile {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid var(--cobalt);
+  outline-offset: 3px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+
+.lucide {
+  width: 1em;
+  height: 1em;
+  flex: none;
+}
+/* respect people who turn off animations */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+

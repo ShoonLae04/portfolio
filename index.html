@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <title>Shoon Lae's Desk</title>
+        <meta name="description" content="Shoon Lae Zayyar - Computer Engineering Student Portfolio.">
+         <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=VT323&family=Lexend:wght@400;500;600;700;800&display=swap">
+
+        <link rel="stylesheet" href="css/base.css">
+        <script defer src="https://unpkg.com/lucide@1.55.0/dist/umd/lucide.min.js"></script>
+        <script defer src="js/main.js"></script>
+       
+    </head>
+    <body>
+        <!-- Sky background  -->
+        <div id="cloudbg" aria-hidden="true">
+            <div class="glow"  style="left:-10%;top:-10%;width:50vw;height:40vh;background:#f2dcff "></div>
+            <div class="glow"  style="right:-10%;bottom:10%;width:45vw;height:45vh;background:#d6f2ff "></div>
+        </div>
+        <main id="stage" aria-label="Shoon Lae Zayyar's Desk">
+
+        </main>
+        <footer class="taskbar">
+            <button class="start" id="startBtn" aria-haspopup="true" aria-expanded="false">
+            <i data-lucide="star" aria-hidden="true"></i>
+                start
+            </button>
+            <div class="tasks" id="tasks" ></div>
+            <div class="tray">
+                <button class="music" id="musicBtn" aria-pressed="false">
+                    <i data-lucide="music" aria-hidden="true"></i>
+                    play
+                </button>
+                <span class="clock" id="clock"></span>
+            </div>
+        </footer>
+
+    </body>
+</html>
