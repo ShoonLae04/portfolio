@@ -1,0 +1,11 @@
+# operating system junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# editor folders
+.vscode/
+.idea/
+
+# never commit secrets
+.env
