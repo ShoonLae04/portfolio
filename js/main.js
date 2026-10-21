@@ -1,1 +1,3 @@
-lucide.createIcons();
+drawIcons();
+initClock();
+initMusic();

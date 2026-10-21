@@ -11,8 +11,14 @@
         href="https://fonts.googleapis.com/css2?family=VT323&family=Lexend:wght@400;500;600;700;800&display=swap">
 
         <link rel="stylesheet" href="css/base.css">
-        <script defer src="https://unpkg.com/lucide@1.55.0/dist/umd/lucide.min.js"></script>
+        <link rel="stylesheet" href="css/taskbar.css">
+        
+        
+        <script defer src="js/icons.js"></script>
+        <script defer src="js/taskbar.js"></script>
+        <script defer src="js/utils.js"></script>
         <script defer src="js/main.js"></script>
+
        
     </head>
     <body>
@@ -26,16 +32,16 @@
         </main>
         <footer class="taskbar">
             <button class="start" id="startBtn" aria-haspopup="true" aria-expanded="false">
-            <i data-lucide="star" aria-hidden="true"></i>
+            <i data-icon="star" aria-hidden="true"></i>
                 start
             </button>
             <div class="tasks" id="tasks" ></div>
             <div class="tray">
                 <button class="music" id="musicBtn" aria-pressed="false">
-                    <i data-lucide="music" aria-hidden="true"></i>
+                    <i data-icon="play" aria-hidden="true"></i>
                     play
                 </button>
-                <span class="clock" id="clock"></span>
+                <time class="clock" id="clock"></time>
             </div>
         </footer>
 

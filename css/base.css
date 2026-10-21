@@ -11,7 +11,7 @@
   --todo: #8a5a00;
   --display: 'VT323', ui-monospace, Menlo , monospace;
   --hand: 'VT323', ui-monospace, Menlo , monospace;
-  --pixels: 'VT323', ui-monospace, Menlo , monospace;
+  --pixel: 'VT323', ui-monospace, Menlo , monospace;
   --body: 'Lexend', 'Segoe UI', system-ui , sans-serif;
   --k:1; --tb:44px;
   color-scheme:light;
@@ -21,7 +21,7 @@ html,body{
 }
 body{
     margin:0;
-    background:linear-gradient(180deg,#8ea5d4 0%,#b4c4e5 34%,#d8e1f3 70%,#eef2fb 100%) fixed;background-color:#c9d5ee;
+    background:linear-gradient(180deg, #5f97ee 0%, #93bbf7 42%, #cfe2fc 78%, #eef6ff 100%) fixed;background-color:#bcd4f8;
     color:var(--ink);
     font-family:var(--body);
     font-size:15px;
@@ -39,12 +39,9 @@ body{
   position: absolute;
   border-radius: 50%;
   filter: blur(30px);
-  opacity: .45;
+  opacity: .3;
 }
-body.mobile {
-  overflow-y: auto;
-  overflow-x: hidden;
-}
+
 button {
   font: inherit;
   color: inherit;
@@ -55,16 +52,23 @@ button {
   outline: 3px solid var(--cobalt);
   outline-offset: 3px;
 }
+/* buttons look pressed: shadows flip and the content nudges 1px down-right */
+.start:hover{filter:brightness(1.08)}
+.start:active,.start[aria-expanded="true"]{box-shadow:inset 2px 2px 0 var(--cobalt-deep),inset -2px -2px 0 #82a3ff;padding:2px 11px 1px 9px}
 
-[hidden] {
-  display: none !important;
-}
+.music:hover{background:#fff}
+.music:active,.music.on{box-shadow:inset 1px 1px 0 #9aa3c7,inset -1px -1px 0 #fff;padding:2px 9px 0 7px}
 
-
-.lucide {
-  width: 1em;
-  height: 1em;
+/* sunken tray clock, like an old desktop */
+.clock{white-space:nowrap;padding:1px 8px;border:1px solid #aab4dc;border-radius:4px;background:#f1f3fc;
+  box-shadow:inset 1px 1px 0 #aab4dc,inset -1px -1px 0 #fff}
+  /* pixel icons (js/icons.js): 24px keeps every pixel sharp */
+.icon {
+  width: 24px;
+  height: 24px;
   flex: none;
+  fill:currentColor;
+  shape-rendering: crispEdges;
 }
 /* respect people who turn off animations */
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}

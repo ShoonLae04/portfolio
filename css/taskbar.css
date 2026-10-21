@@ -1,0 +1,149 @@
+/* ==========================================================
+   taskbar.css: bottom bar, start button, music button, clock
+   ========================================================== */
+
+
+/* ---------- the bar itself ---------- */
+.taskbar {
+  /* stick to the bottom of the screen, full width */
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 80;
+
+  /* height = 44px (--tb), plus extra room for the iPhone home bar */
+  height: calc(var(--tb) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: max(10px, env(safe-area-inset-left, 0px));
+  padding-right: max(10px, env(safe-area-inset-right, 0px));
+  box-sizing: border-box;
+
+  /* put the children in a row: start | tasks | tray */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  /* retro look: light grey bar with a white top edge */
+  background: #e8ecf8;
+  border-top: 2px solid #fff;
+  box-shadow: 0 -2px 0 #aab4dc;
+}
+
+
+/* ---------- start button (left) ---------- */
+.start {
+  /* icon and text side by side */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+
+  /* size and font */
+  padding: 1px 12px 2px 8px;
+  font-family: var(--display);
+  font-size: 21px;
+
+  /* blue raised button */
+  color: #fff;
+  background: linear-gradient(180deg, #5a86ff, var(--cobalt));
+  border: 1px solid #0f2370;
+  border-radius: 6px;
+  box-shadow:
+    inset -2px -2px 0 var(--cobalt-deep),  /* dark edge bottom-right */
+    inset 2px 2px 0 #82a3ff;               /* light edge top-left */
+}
+
+.start:hover {
+  filter: brightness(1.08);
+}
+
+/* pressed: swap the light and dark edges, nudge content 1px */
+.start:active,
+.start[aria-expanded="true"] {
+  box-shadow:
+    inset 2px 2px 0 var(--cobalt-deep),
+    inset -2px -2px 0 #82a3ff;
+  padding: 2px 11px 1px 9px;
+}
+
+
+/* ---------- tasks area (middle) ---------- */
+/* open-window buttons will go here later */
+.tasks {
+  display: flex;
+  gap: 6px;
+  flex: 1;          /* take all the leftover space */
+  min-width: 0;     /* allow it to shrink on small screens */
+  overflow-x: auto; /* scroll sideways if there are too many */
+  scrollbar-width: none;
+}
+
+/* hide the scrollbar in Chrome and Safari too */
+.tasks::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* ---------- tray (right): music + clock ---------- */
+.tray {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+
+  font-family: var(--pixel);
+  font-size: 17px;
+  color: var(--ink-soft);
+}
+
+
+/* ---------- music button ---------- */
+.music {
+  /* icon and text side by side */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  /* size and font */
+  padding: 1px 10px 1px 6px;
+  font-family: var(--pixel);
+  font-size: 17px;
+
+  /* light raised button */
+  color: var(--cobalt);
+  background: #f6f8ff;
+  border: 1px solid #6d77a6;
+  border-radius: 4px;
+  box-shadow:
+    inset -1px -1px 0 #9aa3c7,  /* dark edge bottom-right */
+    inset 1px 1px 0 #fff;       /* light edge top-left */
+}
+
+.music:hover {
+  background: #fff;
+}
+
+/* pressed or playing: swap the edges, nudge content 1px */
+.music:active,
+.music.on {
+  box-shadow:
+    inset 1px 1px 0 #9aa3c7,
+    inset -1px -1px 0 #fff;
+  padding: 2px 9px 0 7px;
+}
+
+
+/* ---------- clock ---------- */
+/* sunken box, like an old desktop tray */
+.clock {
+  white-space: nowrap;  /* keep "12:37 am SGT" on one line */
+  padding: 1px 8px;
+
+  background: #f1f3fc;
+  border: 1px solid #aab4dc;
+  border-radius: 4px;
+  box-shadow:
+    inset 1px 1px 0 #aab4dc,  /* dark edge top-left = looks pushed in */
+    inset -1px -1px 0 #fff;
+}
