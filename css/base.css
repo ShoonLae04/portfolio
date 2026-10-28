@@ -14,6 +14,8 @@
   --pixel: 'VT323', ui-monospace, Menlo , monospace;
   --body: 'Lexend', 'Segoe UI', system-ui , sans-serif;
   --k:1; --tb:44px;
+   /* full taskbar height, including the iPhone home bar */
+  --bar: calc(var(--tb) + env(safe-area-inset-bottom, 0px));
   color-scheme:light;
 }
 html,body{
@@ -52,16 +54,7 @@ button {
   outline: 3px solid var(--cobalt);
   outline-offset: 3px;
 }
-/* buttons look pressed: shadows flip and the content nudges 1px down-right */
-.start:hover{filter:brightness(1.08)}
-.start:active,.start[aria-expanded="true"]{box-shadow:inset 2px 2px 0 var(--cobalt-deep),inset -2px -2px 0 #82a3ff;padding:2px 11px 1px 9px}
 
-.music:hover{background:#fff}
-.music:active,.music.on{box-shadow:inset 1px 1px 0 #9aa3c7,inset -1px -1px 0 #fff;padding:2px 9px 0 7px}
-
-/* sunken tray clock, like an old desktop */
-.clock{white-space:nowrap;padding:1px 8px;border:1px solid #aab4dc;border-radius:4px;background:#f1f3fc;
-  box-shadow:inset 1px 1px 0 #aab4dc,inset -1px -1px 0 #fff}
   /* pixel icons (js/icons.js): 24px keeps every pixel sharp */
 .icon {
   width: 24px;
@@ -72,4 +65,20 @@ button {
 }
 /* respect people who turn off animations */
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
-
+/* phones: the desk becomes a tall page you can scroll */
+body.mobile {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+/* anything with the hidden attribute really disappears */
+[hidden] {
+  display: none !important;
+}
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

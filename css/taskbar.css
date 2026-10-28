@@ -13,7 +13,7 @@
   z-index: 80;
 
   /* height = 44px (--tb), plus extra room for the iPhone home bar */
-  height: calc(var(--tb) + env(safe-area-inset-bottom, 0px));
+  height: var(--bar);
   padding-bottom: env(safe-area-inset-bottom, 0px);
   padding-left: max(10px, env(safe-area-inset-left, 0px));
   padding-right: max(10px, env(safe-area-inset-right, 0px));
@@ -146,4 +146,21 @@
   box-shadow:
     inset 1px 1px 0 #aab4dc,  /* dark edge top-left = looks pushed in */
     inset -1px -1px 0 #fff;
+}
+/* ---------- toast (little reply message) ---------- */
+.toast {
+  /* float above everything, centred, just above the taskbar */
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--bar) + 18px); 
+  transform: translateX(-50%);
+  z-index: 99;
+  
+  /* dark pill with white pixel text */
+  padding: 7px 16px;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 999px;
+  font-family: var(--pixel);
+  font-size: 18px;
 }

@@ -1,0 +1,66 @@
+/* ---------- curved name (centre of the desk) ---------- */
+.hero {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+  /* everything in the arch is sized in em, so this one line scales it all */
+  font-size: clamp(30px, 5vw, 90px);
+}
+
+.name {
+  margin: 0;
+  font: inherit;
+}
+
+/* the arch: a 1px-wide point in the middle that every letter swings around */
+.arc {
+  --r: 6em;        /* circle radius: bigger = flatter arch */
+  --step: 3.6deg;  /* angle between letters: bigger = wider spacing */
+
+  display: block;
+  position: relative;
+  width: 1px;
+  height: 2.1em;          /* room for the ends, which drop lower */
+  margin: 0 auto -1.5em;  /* pull the tagline up under the arch */
+}
+
+.arc span {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  font-family: var(--display);
+  line-height: 1;
+  color: var(--cobalt);
+  text-shadow:
+    3px 3px 0 var(--ice),                 /* white pixel edge */
+    6px 6px 0 rgba(27, 35, 80, .25);      /* soft second shadow */
+
+  /* pivot point sits --r below the letter = centre of the circle */
+  transform-origin: 50% var(--r);
+  /* centre letter = 0deg, letters left of it tilt left, right ones tilt right */
+  transform:
+    translateX(-50%)
+    rotate(calc((var(--i) - (var(--n) - 1) / 2) * var(--step)));
+}
+
+/* ---------- tagline pill ---------- */
+.tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin: 0;
+  padding: 4px 6px;
+
+  font-family: var(--pixel);
+  font-size: 18px;
+  color: var(--ink);
+
+  background: var(--ice);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--ink);   /* same hard shadow as your old card */
+}

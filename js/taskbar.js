@@ -37,3 +37,10 @@ function initMusic() {
     
   });
 }
+btn.addEventListener('click', ()=> {
+  playing = !playing;
+  const label = playing ? 'pause' : 'play';
+  btn.replaceChildren(icon(label), label);
+  btn.classList.toggle('on', playing);
+  toast(playing ? 'now playing ♪' : 'music paused');
+})
