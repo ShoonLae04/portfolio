@@ -1,3 +1,4 @@
 drawIcons();
 initClock();
 initMusic();
+initFriendMessage();

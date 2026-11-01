@@ -19,6 +19,7 @@
         <script defer src="js/taskbar.js"></script>
         <script defer src="js/utils.js"></script>
         <script defer src="js/main.js"></script>
+        <script defer src="js/desk.js"></script>
 
        
     </head>
@@ -28,8 +29,12 @@
             <div class="glow"  style="left:-10%;top:-10%;width:50vw;height:40vh;background:#f2dcff "></div>
             <div class="glow"  style="right:-10%;bottom:10%;width:45vw;height:45vh;background:#d6f2ff "></div>
         </div>
-        <main id="stage" aria-label="Shoon Lae Zayyar's Desk">
+        <main id="stage" aria-label="Shoon Lae Zayyar's Desk.">
+            <!-- soft white glow behind the name -->
+            <div class="blob" aria-hidden="true"></div>
+
             <!-- name: the first thing visitors read -->
+              
             <section class="hero">
             <h1 class="name">
                 <!-- real text for screen readers; the letters below are decoration -->
@@ -48,6 +53,42 @@
             <p class="tagline">Computer Engineering Student </p>
             
             </section>
+            <!-- "hello!" uses the same letter arch as the name -->
+            <p class="arc hello" aria-hidden="true" style="--n:6">
+                <span style="--i:0">h</span><span style="--i:1">e</span><span style="--i:2">l</span>
+                <span style="--i:3">l</span><span style="--i:4">o</span><span style="--i:5">!</span>
+            </p>
+
+            <!-- little note in the top-left corner -->
+            <div class="note" aria-hidden="true">
+                <p>Welcome to my portfolio!</p>
+            </div>
+
+            <!-- sky card: three clouds drift across a little blue square -->
+            <div class="sky-card" aria-hidden="true">
+                <span class="cloud c1"></span>
+                <span class="cloud c2"></span>
+                <span class="cloud c3"></span>
+                <p class="sky-text">Today's Weather <i data-icon = "cloud"></i></p>
+            </div>
+
+            <!-- fake Notepad window with a hint -->
+            <div class="notepad" aria-hidden="true">
+                <div class="win-bar">
+                    untitled - Notepad
+                    <span class="win-boxes"><b></b><b></b><b></b></span>
+                </div>
+                <div class="notepad-menu">
+                    <span><u>F</u>ile</span><span><u>E</u>dit</span><span>F<u>o</u>rmat</span>
+                    <span><u>V</u>iew</span><span><u>H</u>elp</span>
+                </div>
+                <p class="notepad-text">
+                    click a <b>sticker</b><br>
+                    to open it, or drag<br>
+                    it around <i data-icon="heart"></i><span class="caret"></span>
+                </p>
+            </div>
+
 
         </main>
         <footer class="taskbar">
