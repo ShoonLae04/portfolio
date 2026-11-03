@@ -7,16 +7,18 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 const state = {mobile:false };
 // little pop-up reply message at the bottom
 let toastTimer;
-function toast(message){
+function toast(message, iconName){
     let t=$('.toast');
     if (!t){
         t=document.createElement('div');
         t.className='toast';
+        t.setAttribute('role', 'status');
         document.body.appendChild(t);
 
     }
-    t.textContext=message;
-    t.hidden=false;
+    t.replaceChildren(message);                  // the words
+    if (iconName) t.append(icon(iconName));      // + the icon, if you gave one
+    t.hidden = false;
     clearTimeout(toastTimer);
     toastTimer=setTimeout(()=> (t.hidden=true), 2000);
 }

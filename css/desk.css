@@ -1,3 +1,13 @@
+/* ---------- the stage ---------- */
+#stage {
+  /* the frame every absolute decoration is measured from */
+  position: relative;
+  z-index: 1;
+
+  /* fill the screen above the taskbar */
+  height: calc(100% - var(--bar));
+  overflow: hidden;
+}
 /* ---------- curved name (centre of the desk) ---------- */
 .hero {
   position: absolute;
@@ -170,7 +180,13 @@
 .win-boxes {
   display: flex;
   gap: 2px;
+ 
+  width: 12px;
+  height: 11px;
+  background: #eef2fb;
+  border: 1px solid #7f8fb8;
 }
+
 
 /* ---------- Notepad hint ---------- */
 .notepad {
@@ -211,4 +227,108 @@
 .notepad-text .icon {
   vertical-align: -4px;
   color: var(--cobalt);
+}
+/* ---------- message from a friend ---------- */
+.friend-msg{
+  position: absolute;
+  right: 4%;
+  bottom: 4%;
+  z-index: 3;
+  width: 240px;
+  background:#f4f6fc;
+  border: 2px solid #7f8fb8;
+  box-shadow: 5px 5px 0 rgba(27, 35, 80, .2);
+}
+.friend-msg .win-bar {
+  background: linear-gradient(90deg,#6e8fe6, #b8c9f5);
+}
+.friend-msg .win-bar button{
+  padding: 1px;
+  line-height: 0;
+  color: #fff;
+  background: none;
+  border: 1px solid #fff;
+}
+.friend-msg .win-bar .icon {
+  width: 12px;
+  height: 12px;
+}
+
+.friend-body{
+  display: flex;
+  align-items: center;
+  
+  gap: 10px;
+  padding: 10px 12px 6px;
+
+  font-family: var(--pixel);
+  font-size: 18px;
+  line-height: 1.15;
+  color: var(--ink);
+
+}
+.friend-body p {
+  margin: 0;
+}
+/* a little shiny blue ball */
+.globe {
+  width: 30px;
+  aspect-ratio: 1;
+  flex: none;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #d9f0ff, #4f86e8 55%, #1f4fd1);
+  box-shadow: inset -3px -3px 0 rgba(0, 0, 0, .12);
+}
+
+.friend-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 4px 10px 10px;
+}
+
+.friend-btns button {
+  padding: 0 8px;
+  font-family: var(--pixel);
+  font-size: 16px;
+  background: #fff;
+  border: 1.5px solid var(--ink);
+}
+
+.friend-btns button:hover {
+  color: #fff;
+  background: var(--cobalt);
+}
+/* blinking text cursor: steps(1) = on/off, no fade */
+.caret {
+  display: inline-block;
+  width: .5em;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -2px;
+  background: var(--ink);
+  animation: blink 1.1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+.tagline .icon {
+  color: var(--cobalt);
+}
+
+/* ---------- phones ---------- */
+/* no room to spread out, so the desk becomes a tall page you scroll */
+@media (max-width: 720px) {
+  body        { overflow-y: auto; }
+  #stage      { height: 900px; }
+  .corner-note { display: none; }
+
+  .sky-card   { left: 30%; top: 18%; }
+  .blob       { top: 37%; }
+  .hero       { top: 38%; font-size: 40px; }
+  .hero .arc  { margin-bottom: -1.1em; }
+  .notepad    { top: 55%; width: 260px; }
+  .sky-text   { font-size: 16px; }
+  .friend-msg { right: 50%; bottom: 3%; transform: translateX(50%); }
 }

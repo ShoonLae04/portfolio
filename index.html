@@ -16,11 +16,10 @@
         
         
         <script defer src="js/icons.js"></script>
-        <script defer src="js/taskbar.js"></script>
         <script defer src="js/utils.js"></script>
-        <script defer src="js/main.js"></script>
         <script defer src="js/desk.js"></script>
-
+        <script defer src="js/taskbar.js"></script>
+        <script defer src="js/main.js"></script>
        
     </head>
     <body>
@@ -29,6 +28,7 @@
             <div class="glow"  style="left:-10%;top:-10%;width:50vw;height:40vh;background:#f2dcff "></div>
             <div class="glow"  style="right:-10%;bottom:10%;width:45vw;height:45vh;background:#d6f2ff "></div>
         </div>
+        
         <main id="stage" aria-label="Shoon Lae Zayyar's Desk.">
             <!-- soft white glow behind the name -->
             <div class="blob" aria-hidden="true"></div>
@@ -53,14 +53,10 @@
             <p class="tagline">Computer Engineering Student </p>
             
             </section>
-            <!-- "hello!" uses the same letter arch as the name -->
-            <p class="arc hello" aria-hidden="true" style="--n:6">
-                <span style="--i:0">h</span><span style="--i:1">e</span><span style="--i:2">l</span>
-                <span style="--i:3">l</span><span style="--i:4">o</span><span style="--i:5">!</span>
-            </p>
+           
 
             <!-- little note in the top-left corner -->
-            <div class="note" aria-hidden="true">
+            <div class="corner-note" aria-hidden="true">
                 <p>Welcome to my portfolio!</p>
             </div>
 
@@ -88,8 +84,25 @@
                     it around <i data-icon="heart"></i><span class="caret"></span>
                 </p>
             </div>
+            <!---message from a friend-->
+            <div class="friend-msg" id="msg" role="dialog" aria-label="Message from a friend">
+                <div class="win-bar">
+                    Message from a friend
+                    <button data-msg aria-label="Close message">
+                        <i data-icon="close"></i>
+                    </button>
+                </div>
+                <div class="friend-body">
+                    <span class="globe"></span>
+                    <p>just a reminder:<br>you're doing great!</p>
+                </div>
+                <div class="friend-btns">
+                    <button data-msg >thanks!</button>
+                    <button data-msg >omg ily</button>
+                    <button data-msg >Close</button>
 
-
+                </div>
+            </div>
         </main>
         <footer class="taskbar">
             <button class="start" id="startBtn" aria-haspopup="true" aria-expanded="false">
