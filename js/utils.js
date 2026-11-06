@@ -22,3 +22,10 @@ function toast(message, iconName){
     clearTimeout(toastTimer);
     toastTimer=setTimeout(()=> (t.hidden=true), 2000);
 }
+// make text safe to put inside HTML (a < in your text can't break the page)
+const esc = (text) => String(text).replace(/[&<>"]/g, (c) => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;',
+}[c]));
+
+// like esc, but [text in square brackets] becomes a yellow "to fill in" mark
+const fmt = (text) => esc(text).replace(/\[([^\]]+)\]/g, '<span class="todo">$1</span>');

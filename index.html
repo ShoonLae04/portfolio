@@ -13,11 +13,14 @@
         <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/taskbar.css">
         <link rel="stylesheet" href="css/desk.css">
+        <link rel="stylesheet" href="css/windows.css">
         
         
         <script defer src="js/icons.js"></script>
         <script defer src="js/utils.js"></script>
+        <script defer src="js/content.js"></script>
         <script defer src="js/desk.js"></script>
+        <script defer src="js/windows.js"></script>
         <script defer src="js/taskbar.js"></script>
         <script defer src="js/main.js"></script>
        
@@ -53,7 +56,48 @@
             <p class="tagline">Computer Engineering Student </p>
             
             </section>
-           
+                        <!-- ===== stickers: each one opens a window ===== -->
+
+            <!-- About me: polaroid -->
+            <button class="sticker sticker-about" data-open="about" aria-label="About me">
+                <span class="sticker-float">
+                    <svg class="sticker-art" viewBox="0 0 170 204">
+                    <defs><linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4c7cf0"/><stop offset="1" stop-color="#cbdcff"/></linearGradient><clipPath id="cPol"><rect x="11" y="11" width="148" height="142" rx="2"/></clipPath></defs>
+                    <rect width="170" height="204" rx="4" fill="#fdfdff"/>
+                    <g clip-path="url(#cPol)"><rect x="11" y="11" width="148" height="142" fill="url(#gSky)"/>
+                    <g class="drift" fill="#fff" opacity=".92"><ellipse cx="50" cy="58" rx="28" ry="10"/><ellipse cx="62" cy="50" rx="16" ry="12"/><ellipse cx="118" cy="104" rx="30" ry="10"/><ellipse cx="108" cy="96" rx="15" ry="11"/><ellipse cx="40" cy="132" rx="22" ry="8"/></g>
+                    <path d="M85 74 c-6-12-24-10-22 4 c2 10 22 22 22 22 s20-12 22-22 c2-14-16-16-22-4Z" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" class="pulse"/>
+                    </g>
+                    <path d="M30 176 l2 5 5 1 -4 3 1 5 -4 -3 -4 3 1 -5 -4 -3 5 -1Z" fill="#8ea6f5"/><path d="M140 172 l2 5 5 1 -4 3 1 5 -4 -3 -4 3 1 -5 -4 -3 5 -1Z" fill="#ff8fb1"/>
+                    </svg>
+                </span>
+                <span class="tag">about me</span>
+            </button>
+
+            <!-- Projects: CD -->
+            <button class="sticker sticker-projects" data-open="projects" aria-label="Projects">
+                <span class="sticker-float">
+                    <svg class="sticker-art" viewBox="0 0 220 220">
+                    <defs>
+                    <radialGradient id="gDisc"><stop offset=".2" stop-color="#ffffff"/><stop offset=".7" stop-color="#eef1fb"/><stop offset="1" stop-color="#dce2f5"/></radialGradient>
+                    <linearGradient id="gSheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#bcd0ff" stop-opacity=".8"/><stop offset=".35" stop-color="#ffd3ef" stop-opacity=".55"/><stop offset=".6" stop-color="#cffff1" stop-opacity=".5"/><stop offset="1" stop-color="#b9c8ff" stop-opacity=".75"/></linearGradient>
+                    <path id="pCd" d="M110 26 A84 84 0 1 1 109.9 26"/>
+                    </defs>
+                    <g class="spin">
+                    <path fill-rule="evenodd" d="M110 2 A108 108 0 1 0 110.01 2Z M110 88 A22 22 0 1 0 110.01 88Z" fill="url(#gDisc)" stroke="#c9cfe6" stroke-width="1.5"/>
+                    <path fill-rule="evenodd" d="M110 2 A108 108 0 1 0 110.01 2Z M110 88 A22 22 0 1 0 110.01 88Z" fill="url(#gSheen)" opacity=".55"/>
+                    <circle cx="110" cy="110" r="36" fill="none" stroke="#cfd5ea" stroke-width="7" opacity=".8"/>
+                    <text font-family="VT323, monospace" font-size="19" fill="#1f4fd1"><textPath href="#pCd">Shoon Lae * projects vol.1 * made with love</textPath></text>
+                    <g font-family="VT323, monospace" fill="#1b2350"><text x="26" y="104" font-size="13">TRACKLIST</text><text x="22" y="118" font-size="11">1. Recipe Share</text><text x="22" y="130" font-size="11">2. Food Order</text><text x="26" y="142" font-size="11">3. Smart Parking</text><text x="32" y="154" font-size="11">4. Smart Bakery…</text></g>
+                    <path d="M146 92 q8 -10 16 0 t16 0" fill="none" stroke="#5f84f2" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M160 128 l3 7 7 1 -5 5 1 7 -6 -3 -6 3 1 -7 -5 -5 7 -1Z" fill="#ffd34d" stroke="#1f4fd1" stroke-width="1.2"/>
+                    <path d="M150 158 c-3-6-12-5-11 2 c1 5 11 11 11 11 s10-6 11-11 c1-7-8-8-11-2Z" fill="#ff8fb1"/>
+                    </g>
+                    </svg>
+                    <span class="holo"></span>
+                </span>
+                <span class="tag">projects <i data-icon="music"></i></span>
+            </button>
 
             <!-- little note in the top-left corner -->
             <div class="corner-note" aria-hidden="true">
@@ -84,6 +128,7 @@
                     it around <i data-icon="heart"></i><span class="caret"></span>
                 </p>
             </div>
+
             <!---message from a friend-->
             <div class="friend-msg" id="msg" role="dialog" aria-label="Message from a friend">
                 <div class="win-bar">
@@ -104,6 +149,18 @@
                 </div>
             </div>
         </main>
+        <!-- start menu: opens the windows -->
+        <nav class="menu" id="menu" hidden aria-label="Start menu">
+            <div class="menu-head">
+                <b>Shoon Lae Zayyar</b>
+                <small>computer engineering · temasek poly</small>
+            </div>
+            <button data-open="about"><i data-icon="pencil"></i>About me</button>
+            <button data-open="projects"><i data-icon="album"></i>Projects</button>
+        </nav>
+
+        <!-- pop-up windows are added here by js/windows.js -->
+        <div id="wins"></div>
         <footer class="taskbar">
             <button class="start" id="startBtn" aria-haspopup="true" aria-expanded="false">
             <i data-icon="star" aria-hidden="true"></i>

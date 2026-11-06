@@ -10,3 +10,9 @@ function initFriendMessage(){
         });
     });
 }
+// Stickers: clicking one opens its window 
+function initStickers() {
+  $$('.sticker').forEach((sticker) => {
+    sticker.addEventListener('click', () => openWin(sticker.dataset.open));
+  });
+}

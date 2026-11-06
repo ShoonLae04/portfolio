@@ -37,3 +37,39 @@ function initMusic() {
     
   });
 }
+function initStartMenu() {
+  const btn = $('#startBtn');
+  const menu = $('#menu');
+
+  const setOpen = (open) => {
+    menu.hidden = !open;
+    btn.setAttribute('aria-expanded', open);
+  };
+
+  // start button opens / closes the menu
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();   // stop the "click anywhere" below from closing it again
+    setOpen(menu.hidden);
+  });
+
+  // a menu item opens its window
+  menu.addEventListener('click', (e) => {
+    const item = e.target.closest('[data-open]');
+    if (!item) return;
+    openWin(item.dataset.open);
+    setOpen(false);
+  });
+
+  // click anywhere else closes the menu
+  document.addEventListener('click', (e) => {
+    if (!menu.hidden && !menu.contains(e.target)) setOpen(false);
+  });
+
+  // Esc closes the menu first, then the top window
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (!menu.hidden) return setOpen(false);
+    const top = topWindow();
+    if (top) closeWin(top[0]);
+  });
+}

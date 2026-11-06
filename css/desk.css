@@ -316,6 +316,141 @@
 .tagline .icon {
   color: var(--cobalt);
 }
+/* ==========================================================
+   stickers: big clickable drawings that open the windows
+   ========================================================== */
+
+.sticker {
+  position: absolute;
+  z-index: 2;
+  padding: 0;
+  background: none;
+  border: none;
+  transform: translate(-50%, -50%) rotate(var(--turn, 0deg));   /* centre on left/top, then tilt */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* where each sticker sits (same spots as the design picture) */
+.sticker-about {
+  left: 21%;
+  top: 64%;
+  width: clamp(130px, 12vw, 185px);
+  --turn: -7deg;
+}
+
+.sticker-projects {
+  left: 74%;
+  top: 27%;
+  width: clamp(160px, 15vw, 225px);
+}
+
+/* the drawing: white die-cut border + soft shadow */
+.sticker-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter:
+    drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff)
+    drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff)
+    drop-shadow(0 10px 12px rgba(31, 63, 170, .22));
+}
+
+/* gentle bobbing; grows a little on hover */
+.sticker-float {
+  position: relative;
+  display: block;
+  animation: bob 6s ease-in-out infinite alternate;
+  transition: scale .2s;
+}
+
+.sticker:hover .sticker-float {
+  scale: 1.06;
+}
+
+@keyframes bob {
+  from { transform: translateY(-5px) rotate(-1.2deg); }
+  to   { transform: translateY(5px) rotate(1.2deg); }
+}
+
+/* keyboard users see where they are */
+.sticker:focus-visible {
+  outline: none;
+}
+
+.sticker:focus-visible .sticker-art {
+  outline: 3px dashed var(--cobalt);
+  outline-offset: 8px;
+}
+
+/* the little label under each sticker */
+.tag {
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 10px;
+  transform: translateX(-50%) rotate(-4deg);
+
+  font-family: var(--pixel);
+  font-size: 22px;
+  white-space: nowrap;
+  color: var(--cobalt);
+  background: #fff;
+  border-radius: 999px;
+  box-shadow: 0 3px 0 var(--peri);
+}
+
+.sticker:hover .tag {
+  color: #fff;
+  background: var(--cobalt);
+  box-shadow: 0 3px 0 var(--cobalt-deep);
+}
+
+
+/* ---------- little motions inside the drawings ---------- */
+/* polaroid clouds slide, the heart pulses */
+.drift { animation: drift-x 9s ease-in-out infinite alternate; }
+@keyframes drift-x {
+  from { transform: translateX(-26px); }
+  to   { transform: translateX(26px); }
+}
+
+.pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% { transform: scale(1.25); }
+}
+
+/* the CD spins, faster on hover */
+.spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spin 14s linear infinite;
+}
+.sticker:hover .spin { animation-duration: 4s; }
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* rainbow shine on the CD */
+.holo {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: .6;
+  mix-blend-mode: multiply;
+  background: conic-gradient(#ffd3ef, #cfe0ff, #c4fff0, #fff3c4, #ffd3ef, #cfe0ff, #c4fff0, #fff3c4, #ffd3ef);
+  /* only show it on the disc, not in the hole */
+  -webkit-mask: radial-gradient(circle closest-side, transparent 0 21%, #000 22% 30%, transparent 31% 38%, #000 39% 97%, transparent 98%);
+  mask: radial-gradient(circle closest-side, transparent 0 21%, #000 22% 30%, transparent 31% 38%, #000 39% 97%, transparent 98%);
+  animation: spin 7s linear infinite reverse;
+}
 
 /* ---------- phones ---------- */
 /* no room to spread out, so the desk becomes a tall page you scroll */
@@ -331,4 +466,6 @@
   .notepad    { top: 55%; width: 260px; }
   .sky-text   { font-size: 16px; }
   .friend-msg { right: 50%; bottom: 3%; transform: translateX(50%); }
+  .sticker-about    { left: 28%; top: 66%; }
+  .sticker-projects { left: 72%; top: 70%; }
 }

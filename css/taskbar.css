@@ -164,3 +164,73 @@
   font-family: var(--pixel);
   font-size: 18px;
 }
+/* ---------- buttons for open windows (middle of the taskbar) ---------- */
+.task {
+  padding: 1px 10px;
+  font-family: var(--pixel);
+  font-size: 16px;
+  white-space: nowrap;
+  color: var(--ink);
+  background: #f6f8ff;
+  border: 1px solid #6d77a6;
+  border-radius: 4px;
+  box-shadow: inset -1px -1px 0 #9aa3c7, inset 1px 1px 0 #fff;
+}
+
+/* the window that is on top looks pressed in */
+.task.on {
+  color: var(--cobalt);
+  background: #e3e9ff;
+  box-shadow: inset 1px 1px 0 #9aa3c7, inset -1px -1px 0 #fff;
+}
+
+
+/* ---------- start menu ---------- */
+.menu {
+  position: fixed;
+  left: 10px;
+  bottom: calc(var(--bar) + 6px);   /* just above the taskbar */
+  z-index: 90;
+  width: 240px;
+
+  background: var(--ice);
+  border: 2px solid var(--cobalt-deep);
+  box-shadow: 6px 6px 0 rgba(27, 35, 80, .25);
+}
+
+.menu-head {
+  padding: 10px 12px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--cobalt), #6f93ff);
+}
+
+.menu-head b {
+  display: block;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.menu-head small {
+  font-family: var(--pixel);
+  font-size: 15px;
+}
+
+.menu button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 12px;
+  font-family: var(--pixel);
+  font-size: 20px;
+  text-align: left;
+  background: none;
+  border: none;
+}
+
+.menu button:hover {
+  color: var(--cobalt);
+  background: #e3e9ff;
+}
