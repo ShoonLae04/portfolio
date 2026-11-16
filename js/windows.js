@@ -44,22 +44,11 @@ const WINDOWS = {
       <ol class="tracks">
         ${PROJECTS.map((p, i) => `
           <li data-cat="${p.cat.join(' ')}">
-            <details class="track">
-              <summary>
-                <span class="track-no">${String(i + 1).padStart(2, '0')}</span>
-                <span class="track-title">${esc(p.title)}<small>${esc(p.tags.slice(0, 3).join(' · '))}</small></span>
-                <span class="track-type">${esc(p.type)}</span>
-              </summary>
-              <div class="track-body">
-                <ul class="chips">${p.tags.map((tag) => `<li>${esc(tag)}</li>`).join('')}</ul>
-                <p>${fmt(p.summary)}</p>
-                <h3 class="win-label">how it works</h3>
-                <ul>${p.points.map((point) => `<li>${fmt(point)}</li>`).join('')}</ul>
-                <h3 class="win-label">my part</h3>
-                <p>${fmt(p.myPart)}</p>
-                ${p.link ? `<a class="btn solid" href="${esc(p.link)}" target="_blank" rel="noopener">open project</a>` : ''}
-              </div>
-            </details>
+            <button class="track" data-open="project-${i}">
+              <span class="track-no">${String(i + 1).padStart(2, '0')}</span>
+              <span class="track-title">${esc(p.title)}<small>${esc(p.tags.slice(0, 3).join(' · '))}</small></span>
+              <span class="track-type">${esc(p.type)}</span>
+            </button>
           </li>
         `).join('')}
       </ol>
@@ -77,7 +66,36 @@ const WINDOWS = {
     },
   },
 };
-
+// ---------- one window per project ----------
+// adds 'project-0', 'project-1', … to WINDOWS, one for each project in content.js
+PROJECTS.forEach((p,i)=>{
+  WINDOWS[`project-${i}`]={
+    title: p.title,
+    icon: 'album',
+    width: 540,
+    render: ()=>`
+      <div class="win-row">
+        ${p.link ? `<a class="btn solid" href="${esc(p.link)}" target="_blank" rel="noopener">open project</a>` : ''}
+        <button class="btn" data-open="projects">back to tracklist</button>
+      </div>
+      <p class="track-no">track ${String(i+1).padStart(2,'0')} . ${esc(p.type)}</p>
+      <h2 class="win-heading small">${esc(p.title)}</h2>
+      
+      ${p.images.length
+      ? p.images.map((src) => `<img class="shot" src="${esc(src)}" alt="Screenshot of ${esc(p.title)}">`).join('')
+      : `<div class="shot shot-empty">${fmt('[add a screenshot: put it in assets/images/ and add its path to images]')}</div>`}
+      <ul class="chips">${p.tags.map((tag)=> `<li>${esc(tag)}</li>`).join('')}
+      </ul>
+      <p class="project-summary">${fmt(p.summary)}</p>
+      <h3 class="win-label">how it works</h3>
+      <ul class="points">${p.points.map((points)=> `<li>${fmt(points)}</li>`).join('')}
+      </ul>
+      <h3 class="win-label">my part</h3>
+      <p>${fmt(p.myPart)}</p>
+     
+      `,
+  };
+});
 
 // ---------- opening, closing, stacking ----------
 
@@ -119,7 +137,8 @@ function openWin(id) {
   const middle = (space - win.offsetHeight) / 2;
   win.style.left = Math.max(16, innerWidth / 2 - win.offsetWidth / 2 + n * 28) + 'px';
   win.style.top = Math.max(16, Math.min(middle + n * 28, space - win.offsetHeight - 16)) + 'px';
-
+  // photos load a moment later and make the window taller, so fit it again
+  $$('img', win).forEach((img) => img.addEventListener('load', () => fitOnScreen(win)));
   // buttons inside the window
   win.addEventListener('click', (e) => {
     if (e.target.closest('[data-close]')) closeWin(id);
@@ -132,6 +151,13 @@ function openWin(id) {
 
   openWindows[id] = win;
   focusWin(win);
+}
+
+// keep the whole window above the taskbar: move it up if its bottom is cut off
+function fitOnScreen(win) {
+  const space = $('#wins').clientHeight;
+  const top = Math.min(win.offsetTop, space - win.offsetHeight - 16);
+  win.style.top = Math.max(16, top) + 'px';
 }
 
 function closeWin(id) {

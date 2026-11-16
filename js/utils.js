@@ -17,12 +17,12 @@ function toast(message, iconName){
 
     }
     t.replaceChildren(message);                  // the words
-    if (iconName) t.append(icon(iconName));      // + the icon, if you gave one
+    if (iconName) t.append(icon(iconName));      // + the icon
     t.hidden = false;
     clearTimeout(toastTimer);
     toastTimer=setTimeout(()=> (t.hidden=true), 2000);
 }
-// make text safe to put inside HTML (a < in your text can't break the page)
+// make text safe to put inside HTML (a < in  text can't break the page)
 const esc = (text) => String(text).replace(/[&<>"]/g, (c) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;',
 }[c]));

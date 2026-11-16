@@ -265,35 +265,25 @@
   padding: 0;
   list-style: none;
 }
-
-/* <details> opens and closes by itself when clicked on its <summary> */
-.track {
+.track{
+  display:  grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items:center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  text-align: left;
+  font-family: var(--body);
+  color: var(--ink);
   background: #fff;
   border: 1.5px solid var(--line);
   border-radius: 10px;
-  overflow: hidden;
-}
-
-.track:hover {
-  border-color: var(--peri);
-}
-
-.track[open] {
-  border-color: var(--cobalt);
-}
-
-.track summary {
-  display: grid;
-  grid-template-columns: 40px 1fr auto;   /* number | title | type */
-  align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
   cursor: pointer;
-  list-style: none;                       /* hide the default triangle */
-}
 
-.track summary::-webkit-details-marker {
-  display: none;                          /* hide the triangle in Safari too */
+}
+.track:hover {
+  border-color: var(--cobalt);
+  background: #f6f8ff;
 }
 
 .track-no {
@@ -327,17 +317,43 @@
   border-radius: 4px;
 }
 
-.track-body {
-  padding: 12px 16px 16px;
-  border-top: 1.5px dashed var(--line);
+
+/* ---------- one project's window ---------- */
+.win-body > .track-no {
+  margin: 0;
+  font-size: 18px;
 }
 
-.track-body .chips {
-  margin-bottom: 10px;
+.win-heading.small {
+  font-size: 36px;
 }
 
-.track-body ul:not(.chips) {
-  margin: 0 0 6px;
+.shot {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  margin: 10px 0 14px;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+}
+
+.shot-empty {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  padding: 16px;
+  text-align: center;
+  border-style: dashed;
+}
+
+.project-summary {
+  margin-top: 12px !important;
+}
+
+.points {
+  margin: 0;
   padding-left: 18px;
 }
 
