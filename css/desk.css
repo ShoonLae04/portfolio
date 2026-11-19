@@ -72,7 +72,7 @@
   background: var(--ice);
   border: 2px solid var(--ink);
   border-radius: 999px;
-  box-shadow: 3px 3px 0 var(--ink);   /* same hard shadow as your old card */
+  box-shadow: 3px 3px 0 var(--ink);  
 }
 /* ---------- soft white glow behind the name ---------- */
 .blob {
@@ -176,7 +176,7 @@
   background: linear-gradient(90deg, #2a56d6, #86a6ff);
 }
 
-/* the three little squares (minimise, maximise, close) */
+/* the three squares (minimise, maximise, close) */
 .win-boxes {
   display: flex;
   gap: 2px;
@@ -270,7 +270,7 @@
 .friend-body p {
   margin: 0;
 }
-/* a little shiny blue ball */
+/* a shiny blue ball */
 .globe {
   width: 30px;
   aspect-ratio: 1;
@@ -344,6 +344,18 @@
   width: clamp(160px, 15vw, 225px);
 }
 
+.sticker-contact{
+  left: 32%;
+  top: 20%;
+  width: clamp(70px, 7vw, 100px);
+  --turn: 12deg;
+}
+
+.sticker-contact .sticker-art{
+  image-rendering: pixelated;
+
+}
+
 /* the drawing: white die-cut border + soft shadow */
 .sticker-art {
   display: block;
@@ -355,7 +367,7 @@
     drop-shadow(0 10px 12px rgba(31, 63, 170, .22));
 }
 
-/* gentle bobbing; grows a little on hover */
+/* gentle bobbing; grows on hover */
 .sticker-float {
   position: relative;
   display: block;
@@ -382,7 +394,7 @@
   outline-offset: 8px;
 }
 
-/* the little label under each sticker */
+/* the label under each sticker */
 .tag {
   position: absolute;
   left: 50%;
@@ -409,7 +421,7 @@
 }
 
 
-/* ---------- little motions inside the drawings ---------- */
+/* ----------  motions inside the drawings ---------- */
 /* polaroid clouds slide, the heart pulses */
 .drift { animation: drift-x 9s ease-in-out infinite alternate; }
 @keyframes drift-x {
@@ -453,7 +465,7 @@
 }
 
 /* ---------- phones ---------- */
-/* no room to spread out, so the desk becomes a tall page you scroll */
+/* no room to spread out, so the desk becomes a tall page scroll */
 @media (max-width: 720px) {
   body        { overflow-y: auto; }
   #stage      { height: 900px; }
@@ -468,4 +480,5 @@
   .friend-msg { right: 50%; bottom: 3%; transform: translateX(50%); }
   .sticker-about    { left: 28%; top: 66%; }
   .sticker-projects { left: 72%; top: 70%; }
+  .sticker-contact    { left: 80%; top: 11%; }
 }

@@ -12,7 +12,7 @@ const WINDOWS = {
   about: {
     title: 'about_me.txt',
     icon: 'pencil',
-    width: 440,
+    width: 700,
     render: () => `
       <p class="win-hello">hi! I'm ${esc(ME.name)} <i data-icon="heart"></i></p>
       <div class="lined">
@@ -24,7 +24,7 @@ const WINDOWS = {
       </ul>
       <div class="win-row">
         <button class="btn solid" data-open="projects">see my projects</button>
-        <button class="btn" data-open="contact">say hi</button>
+        
       </div>
     `,
   },
@@ -32,10 +32,10 @@ const WINDOWS = {
   projects: {
     title: 'projects.cd',
     icon: 'album',
-    width: 500,
+    width: 700,
     render: () => `
       <h2 class="win-heading">Tracklist</h2>
-      <p>${PROJECTS.length} project${PROJECTS.length === 1 ? '' : 's'} from my Computer Engineering journey. Pick a track to see how it works.</p>
+      <p>${PROJECTS.length} project${PROJECTS.length === 1 ? '' : 's'} from my projects. Pick a track to see how it works.</p>
 
       <div class="filters" role="group" aria-label="Filter projects">
         ${FILTERS.map(([id, label], i) => `<button data-filter="${id}" aria-pressed="${i === 0}">${esc(label)}</button>`).join('')}
@@ -65,6 +65,31 @@ const WINDOWS = {
       }));
     },
   },
+  contact:{
+    title: 'contact',
+    icon: 'phone',
+    width: 700,
+    render: () =>`
+      <h2 class="win-heading">Contact Me</h2>
+      ${CONTACT.map((c,i)=> `
+        <div class="crow">
+        <span class="ci">${esc(c.short)}</span>
+        <div class="crow-text"><b>${esc(c.label)}</b><span> ${fmt(c.value)} </span></div>
+        ${c.copy? `<button class="btn" data-copy="${i}">copy</button>` : ''}
+        ${c.href? `<a class="btn" href="${esc(c.href)}" target="_blank" rel="noopener">open</a> ` : ''}
+        </div>
+        `).join('')}
+    `,
+    init(win){
+      $$('[data-copy]',win).forEach((btn)=> btn.addEventListener('click', ()=>{
+        const value = CONTACT[Number(btn.dataset.copy)].value;
+        navigator.clipboard.writeText(value).then(()=> toast ('copied', 'heart'));
+
+
+      }));
+  
+    },
+  }
 };
 // ---------- one window per project ----------
 // adds 'project-0', 'project-1', … to WINDOWS, one for each project in content.js
@@ -83,7 +108,7 @@ PROJECTS.forEach((p,i)=>{
       
       ${p.images.length
       ? p.images.map((src) => `<img class="shot" src="${esc(src)}" alt="Screenshot of ${esc(p.title)}">`).join('')
-      : `<div class="shot shot-empty">${fmt('[add a screenshot: put it in assets/images/ and add its path to images]')}</div>`}
+      : `<div class="shot shot-empty">${fmt('')}</div>`}
       <ul class="chips">${p.tags.map((tag)=> `<li>${esc(tag)}</li>`).join('')}
       </ul>
       <p class="project-summary">${fmt(p.summary)}</p>
@@ -96,6 +121,8 @@ PROJECTS.forEach((p,i)=>{
       `,
   };
 });
+
+
 
 // ---------- opening, closing, stacking ----------
 
@@ -127,18 +154,16 @@ function openWin(id) {
     </div>
     <div class="win-body">${def.render()}</div>
   `;
-  win.style.width = `min(${def.width}px, calc(100vw - 32px))`;
+  
   $('#wins').appendChild(win);
   drawIcons(win);
+  
+  // each new window opens a little lower and to the right of the last one
+  const n= Object.keys(openWindows).length % 4;
+  win.style.left = `calc(20% + ${n * 28}px)`;
+  win.style.top = `calc(10% + ${n * 28}px)`;
 
-  // open in the middle of the screen; each extra window a little lower and to the right
-  const n = Object.keys(openWindows).length;
-  const space = $('#wins').clientHeight;
-  const middle = (space - win.offsetHeight) / 2;
-  win.style.left = Math.max(16, innerWidth / 2 - win.offsetWidth / 2 + n * 28) + 'px';
-  win.style.top = Math.max(16, Math.min(middle + n * 28, space - win.offsetHeight - 16)) + 'px';
-  // photos load a moment later and make the window taller, so fit it again
-  $$('img', win).forEach((img) => img.addEventListener('load', () => fitOnScreen(win)));
+
   // buttons inside the window
   win.addEventListener('click', (e) => {
     if (e.target.closest('[data-close]')) closeWin(id);
@@ -151,13 +176,6 @@ function openWin(id) {
 
   openWindows[id] = win;
   focusWin(win);
-}
-
-// keep the whole window above the taskbar: move it up if its bottom is cut off
-function fitOnScreen(win) {
-  const space = $('#wins').clientHeight;
-  const top = Math.min(win.offsetTop, space - win.offsetHeight - 16);
-  win.style.top = Math.max(16, top) + 'px';
 }
 
 function closeWin(id) {

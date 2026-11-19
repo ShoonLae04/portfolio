@@ -9,9 +9,8 @@ const ME = {
 
   // About me: each '…' is one paragraph. Add or remove lines freely.
   about: [
-    "I'm a Computer Engineering student at Temasek Polytechnic in Singapore. I enjoy software development, AI-powered tools that make everyday tasks easier.",
-    'I’ve made things with microcontrollers, sensors and MQTT, but the work I enjoy most is software. My favourite so far is a recipe sharing platform I built with Blazor and SQL, with a smart pantry that suggests recipes from the ingredients the user already have',
-    
+    "I'm a Computer Engineering student at Temasek Polytechnic in Singapore. I enjoy software development and AI-powered tools that make everyday tasks easier.",
+    'I’ve made things with microcontrollers, sensors and MQTT, but the work I enjoy most is software. My favourite so far is a recipe sharing platform I built with Blazor and SQL, with a smart pantry that suggests recipes from the ingredients the user already has',    
   ],
 
   languages: ['Java', 'JavaScript', 'HTML / CSS', 'Python', 'C / C++', 'C#', 'SQL'],
@@ -54,4 +53,14 @@ const PROJECTS = [
     images: [],
     link: '',                                   // GitHub / demo link, or '' for none
   },
+];
+
+// =============================================================
+//  CONTACT: the rows in the phone window.
+// =============================================================
+
+const CONTACT = [
+  { short: '@',  label: 'Email',    value: 'zayarshoonlae@gmail.com', copy: true },
+  { short: 'GH', label: 'GitHub',   value: 'github.com/ShoonLae04', href: 'https://github.com/ShoonLae04' },
+  { short: 'in', label: 'LinkedIn', value: 'linkedin.com/in/shoon-lae-zayyar-2775ab346', href: 'https://www.linkedin.com/in/shoon-lae-zayyar-2775ab346/' },
 ];
