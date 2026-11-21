@@ -65,7 +65,7 @@ button {
 }
 /* respect people who turn off animations */
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
-/* phones: the desk becomes a tall page you can scroll */
+/* phones: the desk becomes a tall page when it is scrolled */
 body.mobile {
   overflow-y: auto;
   overflow-x: hidden;

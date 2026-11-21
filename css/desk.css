@@ -8,72 +8,22 @@
   height: calc(100% - var(--bar));
   overflow: hidden;
 }
-/* ---------- curved name (centre of the desk) ---------- */
-.hero {
+
+
+.center-note {
   position: absolute;
   left: 50%;
-  top: 42%;
-  transform: translate(-50%, -50%);
+  top: 10%;
+  margin: 0;
+  transform: translateX(-50%);   /* move it back by half its own width */
+  white-space: nowrap;       
   text-align: center;
-
-  /* everything in the arch is sized in em, so this one line scales it all */
-  font-size: clamp(30px, 5vw, 90px);
-}
-
-.name {
-  margin: 0;
-  font: inherit;
-}
-
-/* the arch: a 1px-wide point in the middle that every letter swings around */
-.arc {
-  --r: 6em;        /* circle radius: bigger = flatter arch */
-  --step: 3.6deg;  /* angle between letters: bigger = wider spacing */
-
-  display: block;
-  position: relative;
-  width: 1px;
-  height: 2.1em;          /* room for the ends, which drop lower */
-  margin: 0 auto -1.5em;  /* pull the tagline up under the arch */
-}
-
-.arc span {
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  font-family: var(--display);
-  line-height: 1;
-  color: var(--cobalt);
-  text-shadow:
-    3px 3px 0 var(--ice),                 /* white pixel edge */
-    6px 6px 0 rgba(27, 35, 80, .25);      /* soft second shadow */
-
-  /* pivot point sits --r below the letter = centre of the circle */
-  transform-origin: 50% var(--r);
-  /* centre letter = 0deg, letters left of it tilt left, right ones tilt right */
-  transform:
-    translateX(-50%)
-    rotate(calc((var(--i) - (var(--n) - 1) / 2) * var(--step)));
-}
-
-/* ---------- tagline pill ---------- */
-.tagline {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  margin: 0;
-  padding: 4px 6px;
-
   font-family: var(--pixel);
-  font-size: 18px;
+  font-size: 50px;
+  line-height: 1.1;
   color: var(--ink);
-
-  background: var(--ice);
-  border: 2px solid var(--ink);
-  border-radius: 999px;
-  box-shadow: 3px 3px 0 var(--ink);  
 }
+
 /* ---------- soft white glow behind the name ---------- */
 .blob {
   position: absolute;
@@ -93,17 +43,8 @@
   50%  { border-radius: 40% 60% 62% 38% / 60% 42% 58% 40%; }
   100% { border-radius: 52% 48% 38% 62% / 42% 56% 44% 58%; }
 }
-.corner-note {
-  position: absolute;
-  left: 24px;
-  top: 14px;
-  margin: 0;
 
-  font-family: var(--pixel);
-  font-size: 20px;
-  line-height: 1.1;
-  color: var(--ink);
-}
+
 /* ---------- sky card ---------- */
 .sky-card {
   position: absolute;
@@ -228,77 +169,9 @@
   vertical-align: -4px;
   color: var(--cobalt);
 }
-/* ---------- message from a friend ---------- */
-.friend-msg{
-  position: absolute;
-  right: 4%;
-  bottom: 4%;
-  z-index: 3;
-  width: 240px;
-  background:#f4f6fc;
-  border: 2px solid #7f8fb8;
-  box-shadow: 5px 5px 0 rgba(27, 35, 80, .2);
-}
-.friend-msg .win-bar {
-  background: linear-gradient(90deg,#6e8fe6, #b8c9f5);
-}
-.friend-msg .win-bar button{
-  padding: 1px;
-  line-height: 0;
-  color: #fff;
-  background: none;
-  border: 1px solid #fff;
-}
-.friend-msg .win-bar .icon {
-  width: 12px;
-  height: 12px;
-}
 
-.friend-body{
-  display: flex;
-  align-items: center;
-  
-  gap: 10px;
-  padding: 10px 12px 6px;
 
-  font-family: var(--pixel);
-  font-size: 18px;
-  line-height: 1.15;
-  color: var(--ink);
 
-}
-.friend-body p {
-  margin: 0;
-}
-/* a shiny blue ball */
-.globe {
-  width: 30px;
-  aspect-ratio: 1;
-  flex: none;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #d9f0ff, #4f86e8 55%, #1f4fd1);
-  box-shadow: inset -3px -3px 0 rgba(0, 0, 0, .12);
-}
-
-.friend-btns {
-  display: flex;
-  justify-content: flex-end;
-  gap: 6px;
-  padding: 4px 10px 10px;
-}
-
-.friend-btns button {
-  padding: 0 8px;
-  font-family: var(--pixel);
-  font-size: 16px;
-  background: #fff;
-  border: 1.5px solid var(--ink);
-}
-
-.friend-btns button:hover {
-  color: #fff;
-  background: var(--cobalt);
-}
 /* blinking text cursor: steps(1) = on/off, no fade */
 .caret {
   display: inline-block;
@@ -313,9 +186,7 @@
 @keyframes blink {
   50% { opacity: 0; }
 }
-.tagline .icon {
-  color: var(--cobalt);
-}
+
 /* ==========================================================
    stickers: big clickable drawings that open the windows
    ========================================================== */
@@ -330,31 +201,98 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* where each sticker sits (same spots as the design picture) */
-.sticker-about {
-  left: 21%;
-  top: 64%;
-  width: clamp(130px, 12vw, 185px);
-  --turn: -7deg;
+
+
+#stage {
+  --px: clamp(3px, min(0.4vw, 0.6vh), 6px);
 }
 
 .sticker-projects {
-  left: 74%;
-  top: 27%;
-  width: clamp(160px, 15vw, 225px);
+  left: 80%;
+  top: 22%;
+  width: calc(26 * var(--px));
 }
 
 .sticker-contact{
-  left: 32%;
-  top: 20%;
-  width: clamp(70px, 7vw, 100px);
-  --turn: 12deg;
+  left: 30%;
+  top: 82%;
+  width: calc(20 * var(--px));
+  --turn: 10deg;
 }
+.sticker-experience{
+  left: 25%;
+  top: 30%;
+  width: calc(28* var(--px));
+}
+.sticker-skills{
+  left: 10%;
+  top: 64%;
+  width: calc(20* var(--px));
+  --turn: -8deg;
+
+}
+.sticker-activities{
+  left: 80%;
+  top: 72%;
+  width: calc(22* var(--px));
+  --turn: 6deg;
+}
+.sticker-achievements{
+  left: 92%;
+  top: 46%;
+  width: calc(22 * var(--px));
+  --turn: 7deg;
+
+
+}
+/* ---------- each pixel sticker has its own little motion ---------- */
+/* phone: a short "ring" wiggle every few seconds */
 
 .sticker-contact .sticker-art{
   image-rendering: pixelated;
-
+  animation: ring 4s ease-in-out infinite;
 }
+@keyframes ring {
+  0%, 70%, 100% { rotate: 0deg; }
+  74% { rotate: -9deg; }
+  78% { rotate: 9deg; }
+  82% { rotate: -6deg; }
+  86% { rotate: 6deg; }
+  90% { rotate: 0deg; }
+}
+
+/* MP3 player: sways to the music */
+.sticker-skills .sticker-art {
+  animation: sway 2.4s ease-in-out infinite alternate;
+}
+@keyframes sway {
+  from { rotate: -5deg; }
+  to   { rotate: 5deg; }
+}
+
+/* CD: spins round, faster when you hover */
+.sticker-projects .sticker-art  { animation: spin 14s linear infinite; }
+.sticker-projects:hover .sticker-art { animation-duration: 4s; }
+@keyframes spin {
+  to {  rotate: 360deg; }
+}
+
+/* trophy: a soft shine */
+.sticker-achievements .sticker-art { animation: shine 3s ease-in-out infinite; }
+@keyframes shine {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.06; }
+}
+
+/* window stack: a little hop now and then, like a new pop-up */
+.sticker-experience .sticker-art { animation: hop 3.5s ease-in-out infinite; }
+@keyframes hop {
+  0%, 80%, 100% { translate: 0 0; }
+  87% { translate: 0 -10px; }
+  93% { translate: 0 0; }
+}
+
+
 
 /* the drawing: white die-cut border + soft shadow */
 .sticker-art {
@@ -421,64 +359,15 @@
 }
 
 
-/* ----------  motions inside the drawings ---------- */
-/* polaroid clouds slide, the heart pulses */
-.drift { animation: drift-x 9s ease-in-out infinite alternate; }
-@keyframes drift-x {
-  from { transform: translateX(-26px); }
-  to   { transform: translateX(26px); }
-}
-
-.pulse {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: pulse 2.2s ease-in-out infinite;
-}
-@keyframes pulse {
-  50% { transform: scale(1.25); }
-}
-
-/* the CD spins, faster on hover */
-.spin {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: spin 14s linear infinite;
-}
-.sticker:hover .spin { animation-duration: 4s; }
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* rainbow shine on the CD */
-.holo {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: .6;
-  mix-blend-mode: multiply;
-  background: conic-gradient(#ffd3ef, #cfe0ff, #c4fff0, #fff3c4, #ffd3ef, #cfe0ff, #c4fff0, #fff3c4, #ffd3ef);
-  /* only show it on the disc, not in the hole */
-  -webkit-mask: radial-gradient(circle closest-side, transparent 0 21%, #000 22% 30%, transparent 31% 38%, #000 39% 97%, transparent 98%);
-  mask: radial-gradient(circle closest-side, transparent 0 21%, #000 22% 30%, transparent 31% 38%, #000 39% 97%, transparent 98%);
-  animation: spin 7s linear infinite reverse;
-}
-
 /* ---------- phones ---------- */
 /* no room to spread out, so the desk becomes a tall page scroll */
 @media (max-width: 720px) {
   body        { overflow-y: auto; }
   #stage      { height: 900px; }
-  .corner-note { display: none; }
-
   .sky-card   { left: 30%; top: 18%; }
   .blob       { top: 37%; }
-  .hero       { top: 38%; font-size: 40px; }
-  .hero .arc  { margin-bottom: -1.1em; }
   .notepad    { top: 55%; width: 260px; }
   .sky-text   { font-size: 16px; }
-  .friend-msg { right: 50%; bottom: 3%; transform: translateX(50%); }
-  .sticker-about    { left: 28%; top: 66%; }
   .sticker-projects { left: 72%; top: 70%; }
   .sticker-contact    { left: 80%; top: 11%; }
 }

@@ -147,7 +147,7 @@
     inset 1px 1px 0 #aab4dc,  /* dark edge top-left = looks pushed in */
     inset -1px -1px 0 #fff;
 }
-/* ---------- toast (little reply message) ---------- */
+/* ---------- toast (reply message) ---------- */
 .toast {
   /* float above everything, centred, just above the taskbar */
   position: fixed;
