@@ -38,9 +38,9 @@
 
             
             <!--  note in center -->
-            <div class="center-note">
-                    <p>Welcome to my portfolio!</p>
-            </div>
+            
+            <p class ="center-note">Welcome to my portfolio!</p>
+            
 
             
             <!-- ===== stickers: each one opens a window ===== -->
@@ -101,22 +101,19 @@
                 <p class="sky-text">Today's Weather <i data-icon = "cloud"></i></p>
             </div>
 
-            <!-- fake Notepad window with a hint -->
-            <div class="notepad" aria-hidden="true">
+            <!-- About me: a big Notepad window in the middle  -->
+            <section class="notepad" aria-hidden="true">
                 <div class="win-bar">
-                    untitled - Notepad
+                    Computer Engineering - Notepad
                     <span class="win-boxes"><b></b><b></b><b></b></span>
                 </div>
                 <div class="notepad-menu">
                     <span><u>F</u>ile</span><span><u>E</u>dit</span><span>F<u>o</u>rmat</span>
                     <span><u>V</u>iew</span><span><u>H</u>elp</span>
                 </div>
-                <p class="notepad-text">
-                    click a <b>sticker</b><br>
-                    to open it, or drag<br>
-                    it around <i data-icon="heart"></i><span class="caret"></span>
-                </p>
-            </div>
+                <!-- desk.js writes my About text, from ME in content.js-->
+                <div class="notepad-text" id="about"></div>
+            </section>
 
         </main>
         <!-- start menu: opens the windows -->

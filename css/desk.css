@@ -13,15 +13,19 @@
 .center-note {
   position: absolute;
   left: 50%;
-  top: 10%;
+  top: 6%;
   margin: 0;
   transform: translateX(-50%);   /* move it back by half its own width */
   white-space: nowrap;       
   text-align: center;
-  font-family: var(--pixel);
-  font-size: 50px;
+  font-family: var(--display);
+  font-size: clamp(36px, 4.6vw, 80px);
   line-height: 1.1;
-  color: var(--ink);
+  color: var(--cobalt);
+    text-shadow:
+    3px 3px 0 var(--ice),                 /* white pixel edge*/
+    6px 6px 0 rgba(27, 35, 80, .25);      /* soft second shadow */
+
 }
 
 /* ---------- soft white glow behind the name ---------- */
@@ -129,13 +133,16 @@
 }
 
 
-/* ---------- Notepad hint ---------- */
+/* ---------- Notepad ---------- */
 .notepad {
   position: absolute;
   left: 50%;
-  top: 63%;
-  width: 290px;
-  transform: translate(-50%, -50%) rotate(-2deg);
+  top: 54%;
+  z-index: 3;                             
+  width: clamp(440px, 40vw, 640px);
+  transform: translate(-50%, -50%);
+  max-height: calc(88% - 140px);          /* leave room for the welcome line above */
+  overflow-y: auto;                       /* very short screens: the text scrolls inside */
 
   background: #fff;
   border: 2px solid #7f8fb8;
@@ -152,13 +159,22 @@
 }
 
 .notepad-text {
-  margin: 0;
-  padding: 10px 16px 14px;
+  padding: 12px 20px 16px;
   font-family: var(--pixel);
-  font-size: 24px;
+  font-size: clamp(20px, 1.6vw, 25px);
   line-height: 1.15;
   color: var(--ink);
 }
+
+.notepad-text p {
+  margin: 0 0 10px;
+}
+
+.notepad-hint {
+  margin-bottom: 0 !important;
+  color: var(--cobalt);
+}
+
 
 .notepad-text b {
   font-weight: 400;
@@ -204,7 +220,7 @@
 
 
 #stage {
-  --px: clamp(3px, min(0.4vw, 0.6vh), 6px);
+  --px: 5px;
 }
 
 .sticker-projects {
@@ -214,7 +230,7 @@
 }
 
 .sticker-contact{
-  left: 30%;
+  left: 20%;
   top: 82%;
   width: calc(20 * var(--px));
   --turn: 10deg;
@@ -359,15 +375,50 @@
 }
 
 
-/* ---------- phones ---------- */
-/* no room to spread out, so the desk becomes a tall page scroll */
+
+/* ---------- short laptop screens ---------- */
+@media (max-height: 700px) and (min-width: 721px) {
+  .sticker-contact { top: 84%; }
+}
+
+
+/* ---------- phones: the desk becomes a tall page when it is scrolled ---------- */
 @media (max-width: 720px) {
-  body        { overflow-y: auto; }
-  #stage      { height: 900px; }
-  .sky-card   { left: 30%; top: 18%; }
-  .blob       { top: 37%; }
-  .notepad    { top: 55%; width: 260px; }
-  .sky-text   { font-size: 16px; }
-  .sticker-projects { left: 72%; top: 70%; }
-  .sticker-contact    { left: 80%; top: 11%; }
+  body {overflow-y: auto;}
+
+  #stage {
+    height: 1320px;
+    --px: 4px;            /* fixed pixel size, big enough to tap */
+  }
+
+  .blob {top: 20%;}
+
+  /* welcome line on top, allowed to wrap onto two lines */
+  .center-note {
+    top: 14px;
+    width: calc(100% - 32px);
+    font-size: 34px;
+    white-space: normal;
+  }
+
+  /* the big weather card: hidden on phones for now (Phase 1c brings the small widget) */
+  .sky-card {
+    display: none;
+  }
+
+  /* the Notepad: full width, under the welcome line */
+  .notepad {
+    top: 250px;
+    width: calc(100% - 32px);
+    max-height: none;
+    transform: translateX(-50%);
+  }
+
+  /* stickers: two columns under the Notepad */
+  .sticker-projects     { left: 28%; top: 53%; }
+  .sticker-contact      { left: 74%; top: 53%; }
+  .sticker-experience   { left: 28%; top: 71%; }
+  .sticker-skills       { left: 74%; top: 71%; }
+  .sticker-achievements { left: 28%; top: 89%; }
+  .sticker-activities   { left: 74%; top: 89%; }
 }

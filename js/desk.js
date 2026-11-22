@@ -1,14 +1,10 @@
-function initFriendMessage(){
-    const msg = $('#msg');
-
-    // every button in the message closes it; two of them also reply
-    $$('[data-msg]', msg).forEach((btn) => {
-        btn.addEventListener('click', () => {
-        msg.hidden = true;
-        if (btn.textContent === 'omg ily') toast('ily too', 'heart');
-        if (btn.textContent === 'thanks!') toast('anytime', 'star');
-        });
-    });
+// The About me Notepad in the middle of the desk, filled in from content.js
+function initAbout(){
+  $('#about').innerHTML = `
+  <p> Hi! I'm <b>${ME.name}</b></p>
+  ${ME.about.map((para) => `<p>${fmt(para)}</p>`).join('')}
+  <p class="notepad-hint"> click a sticker to see more<span class="caret"></span></p>
+  `;
 }
 // Stickers: clicking one opens its window 
 function initStickers() {

@@ -1,6 +1,7 @@
+initAbout();
 drawIcons();
 initClock();
 initMusic();
-initFriendMessage();
 initStickers();
+setInterval(initWeather, 30 * 60 * 1000);   // NEA updates every 30 minutes
 initStartMenu();
