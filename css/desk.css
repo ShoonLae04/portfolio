@@ -48,66 +48,64 @@
   100% { border-radius: 52% 48% 38% 62% / 42% 56% 44% 58%; }
 }
 
-
-/* ---------- sky card ---------- */
-.sky-card {
+/* ---------- weather widget (top-left) ---------- */
+.weather{
   position: absolute;
-  left: 13%;
-  top: 32%;
-  width: clamp(150px, 15vw, 220px);
-  aspect-ratio: 1 / .92;
-  transform: translate(-50%, -50%) rotate(4deg);
-  overflow: hidden;
-
-  background: linear-gradient(#4a7cf0, #bcd2ff 85%);
-  border-radius: 26px;
-  box-shadow:
-    0 0 0 4px #fff,                       /* white sticker border */
-    0 10px 14px rgba(31, 63, 170, .22);   /* soft shadow underneath */
-}
-/* one cloud = one rounded bar + two circles on top (::before, ::after) */
-.cloud {
-  position: absolute;
+  left: 3%;
+  top: 9%;
+  z-index: 3;
+  width: 190px;
+  padding: 8px 12px 10px;
   background: #fff;
-  border-radius: 999px;
-  opacity: .92;
-  animation: drift linear infinite;
+  border: 2px solid var (--cobalt-deep);
+  border-radius: 10px;
+  box-shadow: 4px 4px 0 rgba(31, 79, 209, .25);
 }
-
-.cloud::before,
-.cloud::after {
-  content: "";
-  position: absolute;
-  background: inherit;
-  border-radius: 50%;
+.weather p{
+  margin : 0;
 }
-.cloud::before { width: 55%; height: 180%; left: 14%; bottom: 20%; }
-.cloud::after  { width: 40%; height: 140%; right: 12%; bottom: 25%; }
-/* each cloud: its own size, height, speed and start time */
-.c1 { width: 32%; height: 9%;  top: 22%; animation-duration: 19s; animation-delay: -4s; }
-.c2 { width: 45%; height: 12%; top: 48%; animation-duration: 26s; animation-delay: -15s; }
-.c3 { width: 25%; height: 7%;  top: 70%; animation-duration: 16s; animation-delay: -9s; }
-
-/* slide from off the left edge to off the right edge */
-@keyframes drift {
-  from { left: -50%; }
-  to   { left: 110%; }
+.weather-title{
+  font-family: var(--pixel);
+  font-size: 15px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
 }
-.sky-text {
-  position: absolute;
-  left: 14px;
-  bottom: 10px;
-  margin: 0;
+.weather-now{
   display: flex;
   align-items: center;
-  gap: 6px;
-
-  font-family: var(--hand);
-  font-size: 20px;
-  color: #fff;
-  white-space: nowrap;
-  text-shadow: 0 1px 0 rgba(22, 51, 143, .35);
+  gap: 8px;
+  font-family: var(--display);
+  font-size: 34px;
+  line-height: 1;
+  color: var(--cobalt);
 }
+.weather-now .icon {
+  width: 30px;
+  height: 30px;
+}
+.weather-text {
+  font-family: var(--pixel);
+  font-size: 18px;
+  line-height: 1.1;
+  color: var(--ink);
+}
+.weather-area {
+  margin-top: 6px;
+  width: 100%;
+  padding: 2px 8px;
+    font-family: var(--pixel);
+  font-size: 17px;
+  color: var(--cobalt);
+  background: var(--ice);
+  border: 2px solid var(--peri);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.weather-area:hover {
+  border-color: var(--cobalt);
+}
+
 /* ---------- shared: blue window title bar ---------- */
 .win-bar {
   display: flex;
@@ -401,9 +399,11 @@
     white-space: normal;
   }
 
-  /* the big weather card: hidden on phones for now (Phase 1c brings the small widget) */
-  .sky-card {
-    display: none;
+  /*  weather card widget */
+  .weather {
+    left: 50%;
+    top: 100px;
+    transform: translateX(-50%);
   }
 
   /* the Notepad: full width, under the welcome line */
