@@ -35,7 +35,7 @@ async function initWeather(){
 function showWeather(areaName){
   const box = $('#weather');
   const forecasts = weatherData.forecasts;
-  const mine = forecasts.find((f) => f.area == areaName )?? forecasts[0];
+  const mine = forecasts.find((f) => f.area === areaName )?? forecasts[0];
   box.innerHTML = ` 
   <p class="weather-title">Singapore weather</p>
   <p class="weather-now"><i data-icon="${weatherIcon(mine.forecast)}"></i>${areaTemp(mine.area)}&deg;C</p>

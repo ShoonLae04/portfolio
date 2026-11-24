@@ -261,6 +261,143 @@
 }
 
 
+/*-----------photos-----------*/
+.photo{
+  display: block;
+  box-sizing:border-box;
+  width: 100%;
+  aspect-ratio: 4/3;/*every photo the same shape*/
+  object-fit: cover;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+
+}
+.photo-empty{
+  display: grid;
+  place-items: center;
+  border-style: dashed;
+}
+/* a row of photos that scrolls sideways */
+.gallery {
+  display: flex;
+  gap: 10px;
+  margin: 4px 0 14px;
+  padding-bottom: 6px;
+  overflow-x: auto;
+}
+
+.gallery .photo {
+  flex: none;
+  width: min(240px, 70%);
+}
+/* cards with a photo on top, as many columns as fit */
+.photo-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.photo-cards .card {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;               /* the photo follows the card's round corners */
+}
+
+.photo-cards .photo {
+  border: none;
+  border-bottom: 1.5px solid var(--line);
+  border-radius: 0;
+}
+
+.photo-cards .photo-empty {
+  border-bottom-style: dashed;
+  background: #f6f8ff;
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 14px 12px;
+}
+
+.card-body > span {
+  color: var(--ink-soft);
+}
+
+.card-body p {
+  margin: 6px 0 0;
+}
+/* ---------- Experience: tabs ---------- */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0 14px;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 8px 12px;
+  text-align: left;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink);
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+}
+.tabs small {
+  display: block;
+  font-family: var(--pixel);
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+}
+
+.tabs button[aria-selected="true"] {
+  background: #e3e9ff;
+  border-color: var(--cobalt);
+}
+.steps {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.steps li {
+  margin-bottom: 6px;
+}
+
+/* "what I did" with a pixel tick in front */
+.checks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checks li {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.checks .icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  color: var(--cobalt);
+}
+
+
+
+
+
+
+
 /* ---------- Projects: tracklist ---------- */
 .tracks {
   display: grid;

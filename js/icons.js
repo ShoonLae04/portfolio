@@ -15,6 +15,9 @@ const ICONS = {
   'sun': '<path d="M10 7h4v1h2v2h1v4h-1v2h-2v1h-4v-1H8v-2H7v-4h1V8h2zM11 1h2v3h-2zm0 19h2v3h-2zM1 11h3v2H1zm19 0h3v2h-3zM4 4h2v2H4zm14 0h2v2h-2zM4 18h2v2H4zm14 0h2v2h-2z"/>',
   'moon': '<path d="M8 3h6v2h-3v2H9v10h2v2h3v2H8v-2H6v-2H4V7h2V5h2z"/>',
   'rain': '<path d="M9 2h6v2h2v2h2v2h3v6H2V8h2V6h3V4h2zM6 16h2v2H6zm-1 3h2v2H5zm6-3h2v2h-2zm-1 3h2v2h-2zm6-3h2v2h-2zm-1 3h2v2h-2z"/>',
+  'briefcase': '<path d="M2 8h2v12H2zm18 0h2v12h-2zM4 6h16v2H4zm0 14h16v2H4zM8 4h2v2H8zm2-2h4v2h-4zm4 2h2v2h-2z"/>',
+  'check': '<path d="M18 6h2v2h-2zm-2 2h2v2h-2zm-2 2h2v2h-2zm-2 2h2v2h-2zm-2 2h2v2h-2zm-2 2h2v2H8zm-2-2h2v2H6zm-2-2h2v2H4z"/>',
+
 
 
 };// make one <svg> icon by name

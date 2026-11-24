@@ -35,7 +35,7 @@ const WINDOWS = {
     width: 700,
     render: () => `
       <h2 class="win-heading">Tracklist</h2>
-      <p>${PROJECTS.length} project${PROJECTS.length === 1 ? '' : 's'} from my projects. Pick a track to see how it works.</p>
+      <p>${PROJECTS.length} project${PROJECTS.length === 1 ? '' : 's'} Pick a track to see how it works.</p>
 
       <div class="filters" role="group" aria-label="Filter projects">
         ${FILTERS.map(([id, label], i) => `<button data-filter="${id}" aria-pressed="${i === 0}">${esc(label)}</button>`).join('')}
@@ -65,6 +65,38 @@ const WINDOWS = {
       }));
     },
   },
+
+  //Experience window
+  experience:{
+    title: 'experience.exe',
+    icon: 'briefcase',
+    render: () => `
+      <p class="track-no">${esc(EXPERIENCE.company)}. ${fmt(EXPERIENCE.dates)}</p>
+      <h2 class="win-heading small">${esc(EXPERIENCE.role)}</h2>
+      <p>${fmt(EXPERIENCE.summary)}</p>
+      <div class="tabs" role="tablist" aria-label="My work at ${esc(EXPERIENCE.company)}">
+        ${EXPERIENCE.work.map((w,i)=>`
+          <button role="tab" data-tab=${i} aria-selected="${i ===0}">
+            <small>${esc(w.kind)}</small> ${esc(w.name)}
+          </button>
+
+          `).join('')}
+          </div>
+          <div class="tab-panel" role="tabpanel">${workPanel(0)}</div>
+          `,
+    init(win){
+      const tabs= $$('[data-tab]', win);
+      tabs.forEach((tab)=> tab.addEventListener('click', ()=>
+      {
+        tabs.forEach((t)=> t.setAttribute('aria-selected', t === tab ));
+        $('.tab-panel', win).innerHTML = workPanel(Number(tab.dataset.tab));
+        drawIcons(win);
+      }));
+    },
+
+
+  },
+
   contact:{
     title: 'contact',
     icon: 'phone',
@@ -235,3 +267,37 @@ function updateTasks() {
     return btn;
   }));
 }
+// ---------- photos: used by projects, experience, achievements and activities ----------
+function photo(src, alt){
+  return src 
+  ? `<img class="photo" src="${esc(src)}" alt="Photo: ${esc(alt)}">`
+  :`<div class="photo photo-empty">${fmt('[photo]')}</div>`;
+
+}
+// a row of photos that has scroll sideways
+function gallery(images,alt){
+  return `<div class="gallery">${(images.length ? images : ['']).map((src)=> photo(src, alt )).join('')}</div>`;
+
+}
+// one role, for a tab in the Experience window
+function workPanel(i){
+  const w = EXPERIENCE.work[i];
+  return `
+    <p class="track-no">${esc(w.role)} . ${esc(w.dates)}</p>
+    ${w.images?.length ? gallery(w.images, w.name) : ''}
+    <p>${fmt(w.about)}</p>
+    ${w.steps.length ? `
+      <h3 class="win-label">how it works</h3>
+      <ol class="steps">${w.steps.map((s)=> `<li> ${fmt(s)}</li>`).join('')}</ol>`: '' } 
+    
+    <h3 class="win-label">what I did</h3>
+    <ul class="checks">
+      ${w.did.map((d) => `<li><i data-icon="check"></i><span>${fmt(d)}</span></li>`).join('')}
+    </ul>
+
+    <h3 class="win-label">tech</h3>
+    <ul class="chips">${w.tech.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>
+  `;
+}
+
+
