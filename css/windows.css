@@ -17,17 +17,16 @@
 
 
 /* ---------- one window ---------- */
+/* ---------- one window ---------- */
 .win {
   position: absolute;
-  max-height: calc(100% - 32px);   /* never taller than the space */
-  left: 20%;
-  top: 10%;
-  width: 60%;
-  height: 80%;
+  width: min(1100px, 80%);          /* 80% of the space, but never wider than 1100px */
+  height: min(720px, 85%);          /* 85% of the space, but never taller than 720px */
+  max-height: calc(100% - 24px);    /* never taller than the space above the taskbar */
   display: flex;
-  flex-direction: column;          /* title bar on top, body below */
-  overflow: hidden;                /* keep the round corners clean */
-  pointer-events: auto;            /* the window itself does get clicks */
+  flex-direction: column;
+  overflow: hidden;
+  pointer-events: auto; 
 
   background: var(--ice);
   border: 2px solid var(--cobalt-deep);
@@ -85,13 +84,13 @@
 .win-buttons button {
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 24px;
+  width: 34px;
+  height: 30px;
   padding: 0;
   color: #fff;
   background: rgba(255, 255, 255, .18);
   border: 1.5px solid #fff;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
 .win-buttons button:hover {
@@ -99,23 +98,27 @@
   background: #fff;
 }
 
-.win-buttons [data-close]:hover {
-  color: #fff;
-  background: #ff6b8b;   /* close turns pink */
+.win-buttons [data-close] {
+  background: rgba(255, 107, 139, .55);   /* pink, reads as "close" */
 }
 
 .win-buttons .icon {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
 }
 
 
 /* ---------- body (scrolls if the content is tall) ---------- */
 .win-body {
+  flex: 1;                       /* take the rest of the height */
   overflow-y: auto;
   min-height: 0;
   padding: 18px 22px 22px;
   overscroll-behavior: contain;   /* scrolling here doesn't scroll the page */
+}
+
+.win-body:has(.split) {
+  overflow: hidden;
 }
 
 .win-body p {
@@ -392,39 +395,101 @@
   color: var(--cobalt);
 }
 
+/* ---------- Projects: split view ---------- */
+/* the whole window body: header on top, list + detail  */
 
+.split {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
+.split-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 24px;
+  padding-bottom: 10px;
+  border-bottom: 1.5px solid var(--line);
+}
 
+.split-head p {
+  margin: 0;
+  color: var(--ink-soft);
+}
 
+.split-head .filters {
+  margin: 0;
+}
+/* "Tracklist" and the count side by side, smaller */
+.split-head > div:first-child {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
 
+.split-head .win-heading {
+  margin: 0;
+  font-size: 30px;                 
+}
 
-/* ---------- Projects: tracklist ---------- */
-.tracks {
+.split-head .track-count {
+  font-size: 14px;
+}
+
+/* smaller filter buttons in the split view only */
+.split-head .filters button {
+  padding: 2px 10px;
+  font-size: 15px;
+}
+
+.split-body {
+  flex: 1;                                   /* take the rest of the height */
+  min-height: 0;                             /* …and let the two sides scroll */
   display: grid;
+  grid-template-columns: minmax(200px, 34%) 1fr;   /* list | detail */
+  margin-top: 12px; 
+}
+
+/* left: the list of tracks  */
+.tracks {
+  display: flex;
+  flex-direction: column;
   gap: 8px;
   margin: 0;
-  padding: 0;
+  padding: 12px ;
+  overflow-y: auto;
   list-style: none;
+  background: #eef2ff;
+  border: 1.5px solid var(--line);
+  border-right: 2px solid var(--peri);   /* the stronger divider */
+  border-radius: 10px 0 0 10px;
 }
-.track{
-  display:  grid;
-  grid-template-columns: 40px 1fr auto;
-  align-items:center;
-  gap: 10px;
+
+.track {
+  display: grid;
+  grid-template-columns: 34px 1fr;         /* number | title */
+  align-items: center;
+  gap: 8px;
   width: 100%;
-  padding: 12px 14px;
+  padding: 10px 12px;
   text-align: left;
   font-family: var(--body);
   color: var(--ink);
   background: #fff;
   border: 1.5px solid var(--line);
   border-radius: 10px;
-  cursor: pointer;
-
 }
+
 .track:hover {
   border-color: var(--cobalt);
-  background: #f6f8ff;
+}
+
+/* the track that is showing on the right */
+.track[aria-current="true"] {
+  background: #e3e9ff;
+  border-color: var(--cobalt);
 }
 
 .track-no {
@@ -435,46 +500,68 @@
 
 .track-title {
   font-weight: 700;
-  font-size: 17px;
+  font-size: 15px;
   line-height: 1.3;
 }
 
 .track-title small {
   display: block;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--ink-soft);
 }
 
-.track-type {
-  padding: 1px 8px;
-  font-family: var(--pixel);
-  font-size: 15px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: var(--cobalt);
-  background: #eef1ff;
-  border-radius: 4px;
+/* right: the chosen track  */
+.track-detail {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 14px 22px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-left: none;
+  border-radius: 0 10px 10px 0;
 }
 
+.detail-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
 
-/* ---------- one project's window ---------- */
-.win-body > .track-no {
+.detail-top p {
   margin: 0;
+}
+
+.detail-links {
+  display: flex;
+  gap: 14px;
+  font-family: var(--pixel);
   font-size: 18px;
+}
+
+.detail-links a {
+  color: var(--cobalt);
 }
 
 .win-heading.small {
   font-size: 36px;
 }
 
+/* summary + tags on the left, screenshot on the right */
+.detail-intro {
+  display: grid;
+  grid-template-columns: 1fr minmax(160px, 40%);
+  gap: 18px;
+  align-items: start;
+}
+
 .shot {
   display: block;
-  box-sizing: border-box;
+  box-sizing: border-box;   /* width 100% includes the border */
   width: 100%;
   height: auto;
-  margin: 10px 0 14px;
   background: #fff;
   border: 1.5px solid var(--line);
   border-radius: 8px;
@@ -483,20 +570,45 @@
 .shot-empty {
   display: grid;
   place-items: center;
-  aspect-ratio: 16 / 9;
-  padding: 16px;
-  text-align: center;
+  aspect-ratio: 4 / 3;
   border-style: dashed;
-}
-
-.project-summary {
-  margin-top: 12px !important;
 }
 
 .points {
   margin: 0;
   padding-left: 18px;
 }
+
+/* in a column with a fixed height, flex items shrink by default */
+.track-detail > * {
+  flex-shrink: 0;
+}
+
+
+.detail-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding: 14px 0 4px;
+  border-top: 1.5px solid var(--line);
+  font-family: var(--pixel);
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+
+.detail-nav .btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn .icon {
+  width: 14px;
+  height: 14px;
+}
+
+
 
 /* ---------- Contact ---------- */
 .crow {
@@ -559,4 +671,40 @@
   .win-heading {
     font-size: 40px;
   }
+  .win-body:has(.split) {
+    overflow-y: auto;
+  }
+
+  /* split view: list on top, detail below, the whole window scrolls */
+  .split,
+  .split-body {
+    display: block;
+    height: auto;
+  }
+
+  .tracks {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 12px;
+    border: 1.5px solid var(--line);     
+    border-radius: 10px;
+  }
+
+  .track {
+    min-width: 200px;
+  }
+
+  .track-detail {
+    margin-top: 10px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+  }
+
+  .detail-intro {
+    grid-template-columns: 1fr;
+  }
+
+
+
 }

@@ -103,7 +103,8 @@ const PROJECTS = [
     ],
     myPart:  "Built in a team of two. I made the meal plan and notification features, login, sign-up and password reset, user profiles, bookmarks and the admin dashboard for managing recipes and users. My biggest challenge was authorization in Blazor: making sure users can only see and change their own recipes and meal plans, and that only admins can delete recipes.",
     images: [],
-    link: '',                                   // GitHub / demo link, or '' for none
+    link: '',                                   //  demo link, or '' for none
+    github: '',                                 //  github link, or '' for none
   },
 ];
 
